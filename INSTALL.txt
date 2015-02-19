@@ -1,0 +1,12 @@
+Shell BEGO - Instrucciones de instalación
+
+
+1) Descargue todos los archivos de la Shell de Google Code.
+
+2) Abra una terminal y ejecute "sudo make install".
+
+3) En la misma terminal ejecute "sudo cp manualShell.1 /usr/share/man/es/man1/"
+
+4) En la misma terminal, sin moverse de carpeta, ejecute "./shell".
+
+5) Para mas información ejecute "man manualShell".

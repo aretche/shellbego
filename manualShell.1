@@ -1,0 +1,276 @@
+.TH SHELLBEGO
+
+
+
+.SH SHELLBEGO
+SHELLBEGO - BRACCO ESCALANTE GARCIA OBELAR
+
+
+
+.SH SYNOPSIS
+.B SHELLBEGO
+
+
+
+.SH COPYRIGHT
+ SHELLBEGO is Copyright (C) 2014-2015 Free Software Foundation, Inc.	
+
+
+
+
+.SH DESCRIPTION
+
+SHELLBEGO es un intérprete primitivo de lenguajes de comandos que ejecuta órdenes leídas de la entrada estándar.
+.br
+Ésta shell incorpora comandos básicos del shell BASH (cd - cat - ls - kill- jobs - bg -fg)
+.br
+con sus respectivas opciones, así como tambien el uso de tuberias y redireccionamiento de salida.
+.br
+SHELLBEGO fue desarrollada como trabajo final de la materia Sistemas Operativos FRCU - UTN.
+
+.SH PARAMETERS
+.B Variables
+
+.B UsuarioActual
+.br
+          Mantiene el nombre de del usuario actual que se encuentra
+.br
+          trabajando en el equipo.
+.PP
+.B HostActual
+.br
+          Guarda el nombre del equipo.
+.PP
+.B Dire
+.br
+          Mantiene la ruta del directorio de trabajo actual.
+.PP
+.B OldDir
+.br 
+          Mantiene la ruta del directorio de trabajo anterior al 
+.br
+          actual.
+.PP
+.B Home
+.br
+          Mantiene la ruta del directorio Home del Sistema de Archivos.
+.PP
+.B HomeMasUsuarioActual
+.br
+          Guarda la ruta del directorio del usuario actual en el 
+.br
+          Sistema de Archivos.
+
+.B Entrada
+.br
+	Guarda la entrada ingresada en la shell.
+.PP
+
+.B Ruta
+.br
+	Contiene la direccion absoluta de donde esta ubicado en ese momento el usuario.
+.PP
+
+.B ListaProcesos
+.br
+	Contiene todos los procesos que fueron creados, almacenados en una lista.
+.PP
+
+.B ListaEntradas
+.br
+	Contiene todas las entradas ingresadas, almacenadas en una lista.
+
+
+
+
+.SH REDIRECTION
+.B Redireccion de Salida Estandar
+.br
+NOMBRE DE LA SHELL posee dos formas para la redireccion de la salida estandar: 
+.br
+[n]>arch
+.br
+        Guarda la salida del comando "n" en el archivo "arch". Si el
+.br
+        archivo no existe, lo crea, y si existe lo reescribe.
+.br
+[n]>>arch
+.br
+         Guarda la salida del comando "n" en el archivo "arch". Si el
+.br
+         archivo no existe, lo crea, y si existe lo agrega al final.
+
+
+
+
+.SH PIPE
+.br
+[n] | [m]
+.br
+El comando pipe envia la salida del comando "n" como entrada al comando "m".
+
+
+
+
+
+.SH SHELL BUILTIN COMMANDS
+
+.B mils [OPCION] [RUTA]
+.br
+          Lista en pantalla los archivos del directorio (el directorio
+.br
+          actual por defecto).
+.PP
+.B 	-a 
+.br
+          Lista en pantalla los archivos del directorio con
+.br
+          color. 
+.br
+          Lista ordenado y muestra archivos ocultos.
+.PP
+.B 	-f
+.br
+          Lista en pantalla los archivos del directorio. 
+.br
+          Muestra archivos ocultos.
+.PP
+.B mipwd
+.br 
+          Muestra en pantalla la ruta del directorio actual de trabajo.
+.PP
+.B micd [ruta]
+.br
+          Cambia el directorio de trabajo actual dependiendo del valor
+.br
+          de "ruta".
+.br
+          Si "ruta" es una ruta absoluta o relativa cambia el directorio
+.br
+          actual a esta ruta (si es relativa toma como base la ruta
+.br
+          del directorio actual).
+.br
+          Si "ruta" es igual a "." mantiene el directorio actual.
+.br      
+          Si "ruta" es igual a ".." cambia el directorio actual al 
+.br
+          directorio padre del directorio actual.
+.br
+          Si "ruta" es igual a "-" cambia el directorio actual al
+.br
+          directorio de trabajo anterior.
+.br
+          Si "ruta" es igual a "~" cambia el directorio actual
+.br
+          al directorio HOME. 
+.PP
+.B mikill [OPCION] [PID] 
+.br 
+          Envia "señal" al proceso de pid "pid".
+.br
+ 	Usar -l o -L para mostrar las señales disponibles.
+
+.br
+       -s <señal> o -n <señal>
+.br
+              Especifica la señal que se va a enviar. La señal puede ser especificada
+.br
+              Usando nombre o numero.
+.br
+       -l
+.br
+              Lista los nombres de las señales.
+.PP
+
+
+.B micat [archivo1] [archvo2]
+.br 
+          Concatena "archivo1" con "archivo2" y los muestra en
+.br
+          pantalla. 
+.br
+          Si solo se le pasa un archivo, lo muestra en pantalla.
+.br
+          Si no se le pasa ningun archivo, lee de la entrada
+.br
+          estandar y muestra lo leido.
+
+.PP
+.B mibg [OPCION]
+.br
+	La opcion por defecto es '+'.
+.br
+	<pid>
+.br
+         Envia el proceso a segundo plano y lo ejecuta.
+.br
+	% <numero> o <numero>
+.br
+	  Envia al proceso con el numero de trabajo igual a "numero" a 
+.br
+	segundo plano.
+.br
+	'+'
+.br
+	 Envia al ultimo proceso en la lista de trabajo a segundo plano.
+.br
+	'-'
+.br
+	 Envia al ante ultimo proceso en la lista de trabajo a segundo plano.
+.PP
+.B mifg [OPCION]
+.br
+	La opcion por defecto es '+'.
+.br
+	<pid>
+.br
+          Envia "pid" a primer plano y lo ejecuta
+.br
+	% <numero> o <numero>
+.br
+	  Envia al proceso, con el numero de trabajo igual a "numero", a 
+.br
+	primer plano.
+.br
+	'+'
+.br
+	 Envia al ultimo proceso en la lista de trabajo a primer plano.
+.br
+	'-'
+.br
+	 Envia al ante ultimo proceso en la lista de trabajo a primer plano.
+.PP
+.B miclear
+.br
+	Limpia la pantalla de trabajo.
+.PP
+.B miexit
+.br
+	Sale de la shell.
+.PP
+.B mihistory
+.br
+	Brinda la lista de las entradas ingresadas.
+.PP
+.B mijobs
+.br
+	Brinda la lista de los trabajos creados.
+
+
+.SH COPYRIGHT
+Copyright  ©  2014  Free Software Foundation, Inc.  License GPLv3+: GNU
+
+.SH SEE ALSO
+Para ver el manual en ingles haga 'man shell-EN'.
+
+
+.SH AUTHORS
+Bracco Luciano - luchobracco@gmail.com
+.br 
+Escalante Fernando - ferchuescalante@gmail.com
+.br 
+Garcia Silvana- silbelg@gmail.com
+.br 
+Obelar Facundo - facun2s13@gmail.com
+
